@@ -20,24 +20,29 @@ public class MainActivity extends AppCompatActivity {
     public void guess (View view) {
 
         EditText guessText = findViewById(R.id.guessText);
-        int guessNumber = Integer.parseInt(guessText.getText().toString());
-        String randomNumberString = Integer.toString(randomNumber);
         String message;
-
-        if (guessNumber > randomNumber && guessNumber >= 1 && guessNumber <=20) {
-            message = "Lower";
-        } else if (guessNumber < randomNumber && guessNumber >= 1 && guessNumber <=20) {
-            message = "Higher";
-        } else if (guessNumber == randomNumber) {
-            message = "Correct, the number was " + randomNumberString + "!  Try Again!";
-            generateRandomNumber();
+        if (guessText.getText().toString().isEmpty()) {
+            message = "Please input a number between 1 and 20";
+            Toast.makeText(this, message,
+                    Toast.LENGTH_LONG).show();
         } else {
-            message ="Please input a number between 1 and 20";
+            int guessNumber = Integer.parseInt(guessText.getText().toString());
+            String randomNumberString = Integer.toString(randomNumber);
+            if (guessNumber > randomNumber && guessNumber >= 1 && guessNumber <= 20) {
+                message = "Lower";
+            } else if (guessNumber < randomNumber && guessNumber >= 1 && guessNumber <= 20) {
+                message = "Higher";
+            } else if (guessNumber == randomNumber) {
+                message = "Correct, the number was " + randomNumberString + "!  Try Again!";
+                generateRandomNumber();
+            } else {
+                message = "Please input a number between 1 and 20";
+            }
+
+            Toast.makeText(this, message,
+                    Toast.LENGTH_LONG).show();
+
         }
-
-        Toast.makeText(this, message,
-                Toast.LENGTH_LONG).show();
-
     }
 
     @Override
